@@ -5,7 +5,7 @@ Can be used for creating and adding new Games to a Database, registering users, 
 
 Has option for:  
 *Inserting new Games;  
-*Inserting new Users;
+*Inserting new Users;  
 *Generate Auth Token;
 
 ### This API uses JWT for the authentication (TOKEN).
