@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GameLibrary.Migrations
 {
     [DbContext(typeof(GLContext))]
-    [Migration("20210722204621_Initial")]
-    partial class Initial
+    [Migration("20210729024753_TotalPrice")]
+    partial class TotalPrice
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -121,7 +121,12 @@ namespace GameLibrary.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
+                    b.Property<int?>("SaleId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("SaleId");
 
                     b.ToTable("Games");
                 });
@@ -136,14 +141,15 @@ namespace GameLibrary.Migrations
                     b.Property<string>("ClientId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("GameId")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("Datetime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("TotalPrice")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ClientId");
-
-                    b.HasIndex("GameId");
 
                     b.ToTable("Sales");
                 });
@@ -298,21 +304,20 @@ namespace GameLibrary.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("GameLibrary.Models.Game", b =>
+                {
+                    b.HasOne("GameLibrary.Models.Sale", null)
+                        .WithMany("Games")
+                        .HasForeignKey("SaleId");
+                });
+
             modelBuilder.Entity("GameLibrary.Models.Sale", b =>
                 {
                     b.HasOne("GameLibrary.Models.Client", "Client")
                         .WithMany()
                         .HasForeignKey("ClientId");
 
-                    b.HasOne("GameLibrary.Models.Game", "Game")
-                        .WithMany()
-                        .HasForeignKey("GameId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Client");
-
-                    b.Navigation("Game");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -364,6 +369,11 @@ namespace GameLibrary.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("GameLibrary.Models.Sale", b =>
+                {
+                    b.Navigation("Games");
                 });
 #pragma warning restore 612, 618
         }

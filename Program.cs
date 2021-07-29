@@ -5,6 +5,9 @@ using Microsoft.Extensions.Hosting;
 
 namespace GameLibrary
 {
+    /// <summary>
+    /// Main class
+    /// </summary>
     public class Program
     {
         public static void Main(string[] args)

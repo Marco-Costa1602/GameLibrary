@@ -1,14 +1,21 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GameLibrary.Models
 {
+    /// <summary>
+    /// Default Identity Model
+    /// </summary>
     public class Client : IdentityUser
     {
+        /// <summary>
+        /// Client Funds - used to buy games
+        /// </summary>
         public double Funds { get; set; }
+
+        /// <summary>
+        /// List of games owned by the Client
+        /// </summary>
         public List<Game> GameLibrary { get; set; }
     }
 }

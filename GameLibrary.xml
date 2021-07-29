@@ -1,0 +1,483 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GameLibrary</name>
+    </assembly>
+    <members>
+        <member name="T:GameLibrary.API.APIResponse`1">
+            <summary>
+            Custom Message Model
+            </summary>
+            <typeparam name="T">Any type</typeparam>
+        </member>
+        <member name="P:GameLibrary.API.APIResponse`1.Succeed">
+            <summary>
+            If the operation was successful
+            </summary>
+        </member>
+        <member name="P:GameLibrary.API.APIResponse`1.Message">
+            <summary>
+            Message of the operation
+            </summary>
+        </member>
+        <member name="P:GameLibrary.API.APIResponse`1.Results">
+            <summary>
+            Result of the operation
+            </summary>
+        </member>
+        <member name="T:GameLibrary.API.RoleAuthorize">
+            <summary>
+            Add the RoleTypes to the existing roles
+            </summary>
+        </member>
+        <member name="M:GameLibrary.API.RoleAuthorize.#ctor(GameLibrary.API.RoleTypes[])">
+            <summary>
+            Constructor of the RoleAuth
+            </summary>
+            <param name="r">Roles</param>
+        </member>
+        <member name="T:GameLibrary.API.RoleTypes">
+            <summary>
+            Roles in the application
+            </summary>
+        </member>
+        <member name="F:GameLibrary.API.RoleTypes.Common">
+            <summary>
+            Role for new Clients
+            </summary>
+        </member>
+        <member name="F:GameLibrary.API.RoleTypes.Admin">
+            <summary>
+            Role that has access to certain features
+            </summary>
+        </member>
+        <member name="T:GameLibrary.Controllers.APIControllerBase">
+            <summary>
+            Layer between the controller based. Used for customizing the ActionResult's messages
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Controllers.APIControllerBase.ApiOk``1(``0)">
+            <summary>
+            Ok Message for get endpoints where there's only one return
+            </summary>
+            <typeparam name="T">Receives any type</typeparam>
+            <param name="Results">Any type of object</param>
+            <returns>Returna an OkObjectResult with a Custom message</returns>
+        </member>
+        <member name="M:GameLibrary.Controllers.APIControllerBase.ApiOk``1(``0,System.String)">
+            <summary>
+            Ok message for get endpoints where a message is also presented
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="Results">Objet</param>
+            <param name="Message">String message</param>
+            <returns></returns>
+        </member>
+        <member name="M:GameLibrary.Controllers.APIControllerBase.ApiNotFound``1(System.String)">
+            <summary>
+            NotFound message for when a object isn't found
+            </summary>
+            <typeparam name="T">Type of param in the message</typeparam>
+            <param name="Message">String message</param>
+            <returns>Retuns a NotFoundObjectResult with a Custom message</returns>
+        </member>
+        <member name="M:GameLibrary.Controllers.APIControllerBase.ApiBadRequest``1(``0)">
+            <summary>
+            BadRequest message for error
+            </summary>
+            <typeparam name="T">Used for displaying exceptions</typeparam>
+            <param name="Results">Any type of object</param>
+            <returns>Returns an BadRequest with a custom response that carries an exception</returns>
+        </member>
+        <member name="T:GameLibrary.Controllers.AuthController">
+            <summary>
+            Controller of the Client Authentication
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Controllers.AuthController.#ctor(GameLibrary.Services.AuthService)">
+            <summary>
+            Calls the AuthService
+            </summary>
+            <param name="authService">Auth Service</param>
+        </member>
+        <member name="M:GameLibrary.Controllers.AuthController.Register(GameLibrary.Models.Client)">
+            <summary>
+            Endpoint for registering a new Client
+            </summary>
+            <param name="client">Client object</param>
+            <returns>Returns the created client</returns>
+        </member>
+        <member name="M:GameLibrary.Controllers.AuthController.generateToken(GameLibrary.Models.Client)">
+            <summary>
+            Endpoint for generating an Auth Token for the Client
+            </summary>
+            <param name="client">Client Object</param>
+            <returns>Returns a token string</returns>
+        </member>
+        <member name="T:GameLibrary.Controllers.GameController">
+            <summary>
+            Controlls all game related actions
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Controllers.GameController.#ctor(GameLibrary.Services.GameService)">
+            <summary>
+            Calls the game service
+            </summary>
+            <param name="service">Service that manages games</param>
+        </member>
+        <member name="M:GameLibrary.Controllers.GameController.Get">
+            <summary>
+            Endpoint for getting all games
+            </summary>
+            <returns>Returns a list of games</returns>
+        </member>
+        <member name="M:GameLibrary.Controllers.GameController.Get(System.Int32)">
+            <summary>
+            Enpoint for getting a game based on its Id
+            </summary>
+            <param name="id">Game Id</param>
+            <returns>Returns a Game Object</returns>
+        </member>
+        <member name="M:GameLibrary.Controllers.GameController.getByName(System.String)">
+            <summary>
+            Enpoint for getting a game based on its Name
+            </summary>
+            <param name="name">Game Name</param>
+            <returns>Returns a Game Object</returns>
+        </member>
+        <member name="M:GameLibrary.Controllers.GameController.getCurrent">
+            <summary>
+            Endpoint for getting games owned by the current user
+            </summary>
+            <returns>Returns a list of Game Objects</returns>
+        </member>
+        <member name="M:GameLibrary.Controllers.GameController.Create(GameLibrary.Models.Game)">
+            <summary>
+            Endpoint for creating a new Game Object
+            </summary>
+            <param name="game">Game Object</param>
+            <returns>Returns the created game if successfuly created</returns>
+        </member>
+        <member name="M:GameLibrary.Controllers.GameController.Update(GameLibrary.Models.Game)">
+            <summary>
+            Enpoint for updated an existing game
+            </summary>
+            <param name="game">Game Object</param>
+            <returns>The updated game or a fail message</returns>
+        </member>
+        <member name="M:GameLibrary.Controllers.GameController.Delete(System.Int32)">
+            <summary>
+            Enpoint for deleting an existing game
+            </summary>
+            <param name="id">Game Id</param>
+            <returns>Returns a message</returns>
+        </member>
+        <member name="T:GameLibrary.Controllers.SaleController">
+            <summary>
+            Controller of Sales
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Controllers.SaleController.#ctor(GameLibrary.Services.SaleService)">
+            <summary>
+            Sale Controller constructor that calls the sale service
+            </summary>
+            <param name="service">Service that manage the sales</param>
+        </member>
+        <member name="M:GameLibrary.Controllers.SaleController.Get">
+            <summary>
+            Endpoint that gets ALL sales made
+            </summary>
+            <returns>Returns a List containing ALL sales made</returns>
+        </member>
+        <member name="M:GameLibrary.Controllers.SaleController.getSales">
+            <summary>
+            Endpoint that gets all sales made by the current Client
+            </summary>
+            <returns>Returns a List of Sales of the user</returns>
+        </member>
+        <member name="M:GameLibrary.Controllers.SaleController.Create(GameLibrary.Models.Sale)">
+            <summary>
+            Endpoint that created a new sale for the current Client
+            </summary>
+            <param name="sale">Sale Object</param>
+            <returns>Returns a message</returns>
+        </member>
+        <member name="T:GameLibrary.Data.GLContext">
+            <summary>
+            Context
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Data.GLContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{GameLibrary.Data.GLContext})">
+            <summary>
+            Context constructor
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="P:GameLibrary.Data.GLContext.Clients">
+            <summary>
+            Set of Clients Objects
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Data.GLContext.Games">
+            <summary>
+            Set of Games Objects
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Data.GLContext.Sales">
+            <summary>
+            Set of Sales Objects
+            </summary>
+        </member>
+        <member name="T:GameLibrary.Data.SeedData">
+            <summary>
+            Used for initializing the context for when the application is in production
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Data.SeedData.Init(System.IServiceProvider)">
+            <summary>
+            Initializes the Seed
+            </summary>
+            <param name="serviceProvider">Service provider of the current context</param>
+        </member>
+        <member name="T:GameLibrary.Models.Client">
+            <summary>
+            Default Identity Model
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Models.Client.Funds">
+            <summary>
+            Client Funds - used to buy games
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Models.Client.GameLibrary">
+            <summary>
+            List of games owned by the Client
+            </summary>
+        </member>
+        <member name="T:GameLibrary.Models.Game">
+            <summary>
+            Game Model
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Models.Game.Id">
+            <summary>
+            Primary Key
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Models.Game.Name">
+            <summary>
+            Game Name
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Models.Game.Description">
+            <summary>
+            Description of the Game
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Models.Game.Price">
+            <summary>
+            Price of the game
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Models.Game.Clients">
+            <summary>
+            List of Clients that own that game
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Models.Game.GameRequirements">
+            <summary>
+            System Requirements for the game
+            </summary>
+        </member>
+        <member name="T:GameLibrary.Models.Sale">
+            <summary>
+            Sale Model
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Models.Sale.Id">
+            <summary>
+            Primary Key
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Models.Sale.TotalPrice">
+            <summary>
+            Sum of the games in the sale
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Models.Sale.Datetime">
+            <summary>
+            Date of the sale
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Models.Sale.ClientId">
+            <summary>
+            Id of the Client who made the sale
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Models.Sale.Client">
+            <summary>
+            Client object who made the sale
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Models.Sale.Games">
+            <summary>
+            List of games added to the sale
+            </summary>
+        </member>
+        <member name="T:GameLibrary.Models.SystemRequirements">
+            <summary>
+            Requirements of the Game
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Models.SystemRequirements.Os">
+            <summary>
+            Operational System
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Models.SystemRequirements.Cpu">
+            <summary>
+            Processor 
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Models.SystemRequirements.Memory">
+            <summary>
+            Required amount of memory
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Models.SystemRequirements.Storage">
+            <summary>
+            Required amount of storage
+            </summary>
+        </member>
+        <member name="T:GameLibrary.Program">
+            <summary>
+            Main class
+            </summary>
+        </member>
+        <member name="T:GameLibrary.Services.AuthService">
+            <summary>
+            Service for Authorization and Authentication
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Services.AuthService.#ctor(GameLibrary.Data.GLContext,Microsoft.AspNetCore.Identity.UserManager{GameLibrary.Models.Client},Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Constructor for calling dependencies
+            </summary>
+            <param name="context">Calls the context class</param>
+            <param name="userManager">Calls the UserManager service</param>
+            <param name="configuration">Calls the configuration from the startup</param>
+        </member>
+        <member name="M:GameLibrary.Services.AuthService.Create(GameLibrary.Models.Client)">
+            <summary>
+            Creates a new Client (IdentityUser)
+            </summary>
+            <param name="client">Client object</param>
+            <returns>Returns the result of the task</returns>
+        </member>
+        <member name="M:GameLibrary.Services.AuthService.isValidLogin(GameLibrary.Models.Client)">
+            <summary>
+            Checks if the credentials are valid
+            </summary>
+            <param name="client">Client object</param>
+            <returns>Returns a task boolean</returns>
+        </member>
+        <member name="M:GameLibrary.Services.AuthService.generateToken(GameLibrary.Models.Client)">
+            <summary>
+            Generates a token for the user
+            </summary>
+            <param name="client">Client object</param>
+            <returns>Returs a token in string format</returns>
+        </member>
+        <member name="T:GameLibrary.Services.GameService">
+            <summary>
+            Service for managing Game objects in the Context
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Services.GameService.#ctor(GameLibrary.Data.GLContext)">
+            <summary>
+            Constructor for importing the context
+            </summary>
+            <param name="context">Context type</param>
+        </member>
+        <member name="M:GameLibrary.Services.GameService.Get">
+            <summary>
+            Gets all Games in the context
+            </summary>
+            <returns>Returns a list of containing all games</returns>
+        </member>
+        <member name="M:GameLibrary.Services.GameService.Get(System.Int32)">
+            <summary>
+            Gets a specific Game by its ID
+            </summary>
+            <param name="id">Id of the Game</param>
+            <returns>Return a Game Object</returns>
+        </member>
+        <member name="M:GameLibrary.Services.GameService.Get(System.String)">
+            <summary>
+            Get a specific Game by its Name
+            </summary>
+            <param name="name">Name of the object</param>
+            <returns>Returns a Game object with the required name</returns>
+        </member>
+        <member name="M:GameLibrary.Services.GameService.getCurrent(System.String)">
+            <summary>
+            Gets all games owned by the current Client
+            </summary>
+            <param name="userId">Id of the current Client</param>
+            <returns>Returns a List of Games owned by the current Client</returns>
+        </member>
+        <member name="M:GameLibrary.Services.GameService.Create(GameLibrary.Models.Game)">
+            <summary>
+            Creates a New game object in the context
+            </summary>
+            <param name="game">Game object</param>
+            <returns>Returns a boolean</returns>
+        </member>
+        <member name="M:GameLibrary.Services.GameService.Update(GameLibrary.Models.Game)">
+            <summary>
+            Updates an existing game
+            </summary>
+            <param name="game">Game Object</param>
+            <returns>Returns a boolean</returns>
+        </member>
+        <member name="M:GameLibrary.Services.GameService.Delete(System.Int32)">
+            <summary>
+            Deletes an existing game
+            </summary>
+            <param name="id">Game ID</param>
+            <returns>Returns a boolean</returns>
+        </member>
+        <member name="T:GameLibrary.Services.SaleService">
+            <summary>
+            Service for managing sales
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Services.SaleService.#ctor(GameLibrary.Data.GLContext)">
+            <summary>
+            Constructor made to import the context
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:GameLibrary.Services.SaleService.Get(System.String)">
+            <summary>
+            Uses a SQL Query to select all sales made by the current Client
+            </summary>
+            <param name="clientId">Current Client ID</param>
+            <returns>Returns a list of sales of the user</returns>
+        </member>
+        <member name="M:GameLibrary.Services.SaleService.Get">
+            <summary>
+            Function to get all sales made
+            </summary>
+            <returns>Return all sales in the context</returns>
+        </member>
+        <member name="M:GameLibrary.Services.SaleService.Create(GameLibrary.Models.Sale,System.String)">
+            <summary>
+            Creates a new sale (Cant buy same itens as before)
+            </summary>
+            <param name="sale">Sale Object</param>
+            <param name="userId">Current user Id</param>
+            <returns>Returns a boolean</returns>
+        </member>
+    </members>
+</doc>

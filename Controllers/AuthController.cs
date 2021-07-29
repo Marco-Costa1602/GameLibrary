@@ -1,20 +1,23 @@
 ﻿using GameLibrary.Models;
 using GameLibrary.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GameLibrary.Controllers
 {
+    /// <summary>
+    /// Controller of the Client Authentication
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : APIControllerBase
     {
         #region// DEPENDENCIES
         AuthService _authService;
+        /// <summary>
+        /// Calls the AuthService
+        /// </summary>
+        /// <param name="authService">Auth Service</param>
         public AuthController(AuthService authService)
         {
             _authService = authService;
@@ -22,6 +25,11 @@ namespace GameLibrary.Controllers
         #endregion
 
         #region// REGISTER
+        /// <summary>
+        /// Endpoint for registering a new Client
+        /// </summary>
+        /// <param name="client">Client object</param>
+        /// <returns>Returns the created client</returns>
         [HttpPost]
         [Route("Register")]
         public IActionResult Register([FromBody]Client client)
@@ -45,9 +53,15 @@ namespace GameLibrary.Controllers
         }
         #endregion
 
+        #region// TOKEN
+        /// <summary>
+        /// Endpoint for generating an Auth Token for the Client
+        /// </summary>
+        /// <param name="client">Client Object</param>
+        /// <returns>Returns a token string</returns>
         [HttpPost]
         [Route("Token")]
-        public IActionResult generateToken([FromBody]Client client, [FromBody)
+        public IActionResult generateToken([FromBody]Client client)
         {
             try
             {
@@ -59,7 +73,6 @@ namespace GameLibrary.Controllers
                 return ApiBadRequest<string>(e.Message);
             }
         }
-
-
+        #endregion
     }
 }
